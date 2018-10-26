@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -64,6 +67,7 @@
     </ApplicationDefinition>
     <Compile Include="Data\IProductDataService.cs" />
     <Compile Include="Data\ProductDataService.cs" />
+    <Compile Include="Startup\Bootstrapper.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
@@ -105,11 +109,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TheShop.Model\TheShop.Model.csproj">
-      <Project>{79e703ae-a4fa-441b-a97b-7bb225a15930}</Project>
+    <ProjectReference Include="..\TheShop.MVVM.DataAccess\TheShop.DataAccess.csproj">
+      <Project>{e95b3cff-9bdb-430b-a331-ae064928877f}</Project>
+      <Name>TheShop.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TheShop.MVVM.Model\TheShop.Model.csproj">
+      <Project>{033e0d37-3a31-4d8b-801b-f9cbf4b40e5b}</Project>
       <Name>TheShop.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

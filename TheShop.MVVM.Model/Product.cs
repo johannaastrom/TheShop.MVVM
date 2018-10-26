@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TheShop.Model
+﻿namespace TheShop.Model
 {
 	public class Product
 	{
@@ -11,3 +9,4 @@ namespace TheShop.Model
 		public string Description { get; set; }
 	}
 }
+
