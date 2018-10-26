@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheShop.MVVM", "TheShop.MVVM\TheShop.MVVM.csproj", "{18E51B30-D2D8-46A4-8B7C-6FC8755FF5AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheShop.UI", "TheShop.MVVM\TheShop.UI.csproj", "{18E51B30-D2D8-46A4-8B7C-6FC8755FF5AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheShop.Model", "TheShop.Model\TheShop.Model.csproj", "{79E703AE-A4FA-441B-A97B-7BB225A15930}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheShop.DataAccess", "TheShop.DataAccess\TheShop.DataAccess.csproj", "{707310E6-F10D-4EAE-9F60-48EB7A888D62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{18E51B30-D2D8-46A4-8B7C-6FC8755FF5AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18E51B30-D2D8-46A4-8B7C-6FC8755FF5AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18E51B30-D2D8-46A4-8B7C-6FC8755FF5AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79E703AE-A4FA-441B-A97B-7BB225A15930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79E703AE-A4FA-441B-A97B-7BB225A15930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79E703AE-A4FA-441B-A97B-7BB225A15930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79E703AE-A4FA-441B-A97B-7BB225A15930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{707310E6-F10D-4EAE-9F60-48EB7A888D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{707310E6-F10D-4EAE-9F60-48EB7A888D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{707310E6-F10D-4EAE-9F60-48EB7A888D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{707310E6-F10D-4EAE-9F60-48EB7A888D62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

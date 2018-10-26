@@ -94,5 +94,19 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TheShop.DataAccess\TheShop.DataAccess.csproj">
+      <Project>{707310e6-f10d-4eae-9f60-48eb7a888d62}</Project>
+      <Name>TheShop.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TheShop.Model\TheShop.Model.csproj">
+      <Project>{79e703ae-a4fa-441b-a97b-7bb225a15930}</Project>
+      <Name>TheShop.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
