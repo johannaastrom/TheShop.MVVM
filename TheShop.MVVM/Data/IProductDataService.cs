@@ -6,6 +6,6 @@ namespace TheShop.MVVM.Data
 {
 	public interface IProductDataService
 	{
-		Task<List<Product>> GetAllAsync();
+		Task<Product> GetByIdAsync(int productId);
 	}
 }

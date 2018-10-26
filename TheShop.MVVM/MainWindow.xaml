@@ -3,17 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:view="clr-namespace:TheShop.MVVM.View"
         xmlns:local="clr-namespace:TheShop.MVVM"
         mc:Ignorable="d"
         Title="The Shop" Height="450" Width="800">
     <Grid>
-        <ListView HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="201" Margin="80,48,0,0" 
-                  ItemsSource="{Binding Products}"
-                  SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
-                  DisplayMemberPath="Name"/>
-        <Label Content="Product Name" HorizontalAlignment="Left" Margin="360,73,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding SelectedProduct.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="360,112,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding SelectedProduct.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="360,190,0,0"/>
-        <Label Content="Product Description" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="14.818,4.016" Margin="360,150,0,0" Width="120"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <view:NavigationView DataContext="{Binding NavigationViewModel}"/>
+        <view:ProductDetailView Grid.Column="1" DataContext="{Binding ProductDetailViewModel}"/>
+        
     </Grid>
 </Window>

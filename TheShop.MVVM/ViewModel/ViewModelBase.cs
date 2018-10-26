@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace TheShop.MVVM.ViewModel
 {
-	public class ViewModelBAse : INotifyPropertyChanged
+	public class ViewModelBase : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 

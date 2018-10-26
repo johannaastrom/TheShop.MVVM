@@ -2,38 +2,27 @@
 using TheShop.Model;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using System;
 
 namespace TheShop.MVVM.ViewModel
 {
-	public class ProductViewModel : ViewModelBAse
+	public class ProductViewModel : ViewModelBase
 	{
-		private IProductDataService _productDataService;
-		private Product _selectedProduct;
-
-		public ProductViewModel(IProductDataService productDataService)
+		public ProductViewModel(INavigationViewModel navigationViewModel, IProductDetailViewModel productViewModel)
 		{
-			Products = new ObservableCollection<Product>();
-			_productDataService = productDataService;
+			NavigationViewModel = navigationViewModel;
+			ProductDetailViewModel = productViewModel;
+
+			//CreateNewProductCommand = new DelegateCommand(OnCreateNewProductExecute);
 		}
 
 		public async Task LoadAsync()
 		{
-			var products = await _productDataService.GetAllAsync();
-			Products.Clear();
-			foreach (var product in products)
-			{
-				Products.Add(product);
-			}
+			await NavigationViewModel.LoadAsync();
 		}
 
-		public ObservableCollection<Product> Products { get; set; }
-
-		public Product SelectedProduct {
-			get { return _selectedProduct; }
-			set { _selectedProduct = value;
-				OnPropertyChanged();
-			}
-		}
-
+		public INavigationViewModel NavigationViewModel { get; }
+		public IProductDetailViewModel ProductDetailViewModel { get; }
 	}
 }
