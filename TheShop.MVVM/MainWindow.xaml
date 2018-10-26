@@ -10,15 +10,10 @@
         <ListView HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="201" Margin="80,48,0,0" 
                   ItemsSource="{Binding Products}"
                   SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
-                  DisplayMemberPath="Name">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+                  DisplayMemberPath="Name"/>
         <Label Content="Product Name" HorizontalAlignment="Left" Margin="360,73,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding SelectedProduct.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="360,112,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding SelectedProduct.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="360,163,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding SelectedProduct.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="360,190,0,0"/>
+        <Label Content="Product Description" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="14.818,4.016" Margin="360,150,0,0" Width="120"/>
     </Grid>
 </Window>

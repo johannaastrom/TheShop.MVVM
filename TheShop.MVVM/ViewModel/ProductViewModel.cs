@@ -1,6 +1,7 @@
 ﻿using TheShop.MVVM.Data;
 using TheShop.Model;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace TheShop.MVVM.ViewModel
 {
@@ -15,9 +16,9 @@ namespace TheShop.MVVM.ViewModel
 			_productDataService = productDataService;
 		}
 
-		public void Load()
+		public async Task LoadAsync()
 		{
-			var products = _productDataService.GetAll();
+			var products = await _productDataService.GetAllAsync();
 			Products.Clear();
 			foreach (var product in products)
 			{

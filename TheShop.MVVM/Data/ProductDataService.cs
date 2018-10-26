@@ -1,24 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using TheShop.DataAccess;
 using TheShop.Model;
 
 namespace TheShop.MVVM.Data
 {
 	public class ProductDataService : IProductDataService
 	{
-		public IEnumerable<Product> GetAll()
+		private Func<ProductDbContext> _contextCreator;
+
+		public ProductDataService(Func<ProductDbContext> contextCreator)
 		{
-			return new List<Product>()
+			_contextCreator = contextCreator;
+		}
+
+		public async Task<List<Product>> GetAllAsync()
+		{
+			//Load data from database
+			using (var ctx = _contextCreator())
 			{
-				//TODO: load data from real database
-				 new Product() {
-					 Name ="Dog",
-					 Description ="Retriver"
-				 },
-				 new Product() {
-					 Name ="Dog",
-					 Description ="Pug"
-				 }
-			};
+				return await ctx.Products.AsNoTracking().ToListAsync();
+			}
 		}
 	}
 }
