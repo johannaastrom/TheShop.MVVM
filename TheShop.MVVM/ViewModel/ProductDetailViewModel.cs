@@ -31,6 +31,15 @@ namespace TheShop.MVVM.ViewModel
 			var product = await _productDataService.GetByIdAsync(productId);
 
 			Product = new ProductWrapper(product);
+			Product.PropertyChanged += (s, e) =>
+			{
+				if (e.PropertyName == nameof(Product.HasErrors))
+				{
+					((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+				}
+			};
+
+			((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
 		}
 
 		public ProductWrapper Product
@@ -58,8 +67,8 @@ namespace TheShop.MVVM.ViewModel
 
 		private bool OnSaveCanExecute()
 		{
-			//TODO check if product is valid
-			return true;
+			//TODO check in addition if product has changes
+			return Product!=null && !Product.HasErrors;
 		}
 
 		private async void OnOpenProductDetailView(int productId)

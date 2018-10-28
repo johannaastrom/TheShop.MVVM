@@ -1,95 +1,39 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using TheShop.Model;
-using TheShop.MVVM.ViewModel;
 
 namespace TheShop.MVVM.Wrapper
 {
-	public class ProductWrapper : ViewModelBase, INotifyDataErrorInfo
+	public class ProductWrapper : ModelWrapper<Product>
 	{
-		public ProductWrapper(Product model)
+		public ProductWrapper(Product model) : base(model)
 		{
-			Model = model;
 		}
-
-		public Product Model { get; set; }
 
 		public int Id { get { return Model.Id; } }
 
 		public string Name
 		{
-			get { return Model.Name; }
-			set
-			{
-				Model.Name = value;
-				OnPropertyChanged();
-				ValidateProperty(nameof(Name));
-			}
+			get { return GetValue<string>()	; }
+			set { SetValue(value); }
 		}
 
-		private void ValidateProperty(string propertyName)
+		public string Description
 		{
-			ClearErrors(propertyName);
+			get { return GetValue<string>(); }
+			set { SetValue(value); }
+		}
+
+		protected override IEnumerable<string> ValidateProperty(string propertyName)
+		{
 			switch (propertyName)
 			{
 				case nameof(Name):
 					if (string.Equals(Name, "Robot", StringComparison.OrdinalIgnoreCase))
 					{
-						AddError(propertyName, "Robots are not valid products");
+						yield return "Robot is not a valis product";
 					}
 					break;
-			}
-		}
-
-		public string Description
-		{
-			get { return Model.Description; }
-			set
-			{
-				Model.Description = value;
-				OnPropertyChanged();
-			}
-		}
-
-		private Dictionary<string, List<string>> _errorsByPropertyName =
-			new Dictionary<string, List<string>>();
-
-		public bool HasErrors => _errorsByPropertyName.Any();
-
-		public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-
-		public IEnumerable GetErrors(string propertyName)
-		{
-			return _errorsByPropertyName.ContainsKey(propertyName) ? _errorsByPropertyName[propertyName] : null;
-		}
-
-		private void OnErrorsChanged(string propertyName)
-		{
-			ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-		}
-
-		private void AddError(string propertyName, string error)
-		{
-			if (!_errorsByPropertyName.ContainsKey(propertyName))
-			{
-				_errorsByPropertyName[propertyName] = new List<string>();
-			}
-			if (!_errorsByPropertyName[propertyName].Contains(error))
-			{
-				_errorsByPropertyName[propertyName].Add(error);
-				OnErrorsChanged(propertyName);
-			}
-		}
-
-		private void ClearErrors(string propertyName)
-		{
-			if (_errorsByPropertyName.ContainsKey(propertyName))
-			{
-				_errorsByPropertyName.Remove(propertyName);
-				OnErrorsChanged(propertyName);
 			}
 		}
 	}
