@@ -26,6 +26,21 @@ namespace TheShop.MVVM.Wrapper
 			{
 				Model.Name = value;
 				OnPropertyChanged();
+				ValidateProperty(nameof(Name));
+			}
+		}
+
+		private void ValidateProperty(string propertyName)
+		{
+			ClearErrors(propertyName);
+			switch (propertyName)
+			{
+				case nameof(Name):
+					if (string.Equals(Name, "Robot", StringComparison.OrdinalIgnoreCase))
+					{
+						AddError(propertyName, "Robots are not valid products");
+					}
+					break;
 			}
 		}
 
