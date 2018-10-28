@@ -72,6 +72,7 @@
     <Compile Include="Data\IProductLookupDataService.cs" />
     <Compile Include="Data\LookupDataService.cs" />
     <Compile Include="Data\ProductDataService.cs" />
+    <Compile Include="Event\AfterProductSavedEvent.cs" />
     <Compile Include="Event\OpenProductDetailViewEvent.cs" />
     <Compile Include="Startup\Bootstrapper.cs" />
     <Compile Include="ViewModel\INavigationItemViewModel.cs" />

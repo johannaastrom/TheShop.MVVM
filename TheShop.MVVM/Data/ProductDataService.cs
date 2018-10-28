@@ -23,5 +23,15 @@ namespace TheShop.MVVM.Data
 				return await ctx.Products.AsNoTracking().SingleAsync(p => p.Id == productId);
 			}
 		}
-	}
+
+		public async Task SaveASync(Product product)
+		{
+			using(var ctx = _contextCreator())
+			{
+				ctx.Products.Attach(product);
+				ctx.Entry(product).State = EntityState.Modified;
+				await ctx.SaveChangesAsync();
+			}
+		}
+	}	
 }

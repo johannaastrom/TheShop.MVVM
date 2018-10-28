@@ -1,6 +1,8 @@
-﻿using Prism.Events;
+﻿using Prism.Commands;
+using Prism.Events;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TheShop.Model;
 using TheShop.MVVM.Data;
 using TheShop.MVVM.Event;
@@ -18,6 +20,25 @@ namespace TheShop.MVVM.ViewModel
 			_eventAggregator = eventAggregator;
 			_eventAggregator.GetEvent<OpenProductDetailViewEvent>()
 				.Subscribe(OnOpenProductDetailView);
+
+			SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
+		}
+
+		private async void OnSaveExecute()
+		{
+			await _productDataService.SaveASync(Product);
+			_eventAggregator.GetEvent<AfterProductSavedEvent>().Publish(
+				new AfterProductSavedEventArgs
+				{
+					Id = Product.Id,
+					DisplayProduct = Product.Name
+				});
+		}
+
+		private bool OnSaveCanExecute()
+		{
+			//TODO check if product is valid
+			return true;
 		}
 
 		private async void OnOpenProductDetailView(int productId)
@@ -40,5 +61,7 @@ namespace TheShop.MVVM.ViewModel
 				OnPropertyChanged();
 			}
 		}
+
+		public ICommand SaveCommand { get; }
 	}
 }

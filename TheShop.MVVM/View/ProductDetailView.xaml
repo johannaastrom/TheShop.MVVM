@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -15,12 +15,15 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
-        </Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>-->
 
         <Label Content="Product Name" HorizontalAlignment="Left" Margin="20,83,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Product.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="20,114,0,0"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Product.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="20,190,0,0" Grid.RowSpan="7"/>
         <Label Content="Product Description" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="14.818,4.016" Margin="20,152,0,0" Width="120"/>
-        
+        <!--<StackPanel Orientation="Vertical"/>-->
+        <Button Content="Save" Margin="20,236,660,158.6" Command="{Binding SaveCommand}"/>
+
     </Grid>
 </UserControl>
