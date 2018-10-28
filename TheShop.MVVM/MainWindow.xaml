@@ -8,11 +8,18 @@
         mc:Ignorable="d"
         Title="The Shop" Height="450" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-        </Grid.ColumnDefinitions>
-        <view:NavigationView DataContext="{Binding NavigationViewModel}"/>
-        <view:ProductDetailView Grid.Column="1" DataContext="{Binding ProductDetailViewModel}"/>
-        
+        </Grid.ColumnDefinitions>-->
+        <view:NavigationView DataContext="{Binding NavigationViewModel}" Margin="0,-10,-153.2,10" Grid.RowSpan="2"/>
+        <view:ProductDetailView DataContext="{Binding ProductDetailViewModel}" Margin="354,0,-381.2,0" Grid.RowSpan="2"/>
+        <Menu HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="100" Margin="667,29,-566.2,0">
+            <MenuItem Header="Create"/>
+            <MenuItem Header="New Product" Command="{Binding CreateNewProductCommand}"/>
+        </Menu>
     </Grid>
 </Window>

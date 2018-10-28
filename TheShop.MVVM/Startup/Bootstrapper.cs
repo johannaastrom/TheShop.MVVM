@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Prism.Events;
 using TheShop.Data;
 using TheShop.DataAccess;
 using TheShop.MVVM.Data;
@@ -11,6 +12,8 @@ namespace TheShop.MVVM.Startup
 		public IContainer Bootstrap()
 		{
 			var builder = new ContainerBuilder();
+
+			builder.RegisterType<EventAggregator>().As<IEventAggregator>().SingleInstance();
 
 			builder.RegisterType<ProductDbContext>().AsSelf();
 			builder.RegisterType<MainWindow>().AsSelf();
