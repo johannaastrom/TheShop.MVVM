@@ -6,6 +6,7 @@ using System.Windows.Input;
 using TheShop.Model;
 using TheShop.MVVM.Data;
 using TheShop.MVVM.Event;
+using TheShop.MVVM.Wrapper;
 
 namespace TheShop.MVVM.ViewModel
 {
@@ -13,6 +14,7 @@ namespace TheShop.MVVM.ViewModel
 	{
 		private IProductDataService _productDataService;
 		private IEventAggregator _eventAggregator;
+		private ProductWrapper _Product;
 
 		public ProductDetailViewModel(IProductDataService productDataService, IEventAggregator eventAggregator)
 		{
@@ -24,9 +26,28 @@ namespace TheShop.MVVM.ViewModel
 			SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
 		}
 
+		public async Task LoadAsAsync(int productId)
+		{
+			var product = await _productDataService.GetByIdAsync(productId);
+
+			Product = new ProductWrapper(product);
+		}
+
+		public ProductWrapper Product
+		{
+			get { return _Product; }
+			private set
+			{
+				_Product = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public ICommand SaveCommand { get; }
+
 		private async void OnSaveExecute()
 		{
-			await _productDataService.SaveASync(Product);
+			await _productDataService.SaveASync(Product.Model);
 			_eventAggregator.GetEvent<AfterProductSavedEvent>().Publish(
 				new AfterProductSavedEventArgs
 				{
@@ -45,23 +66,5 @@ namespace TheShop.MVVM.ViewModel
 		{
 			await LoadAsAsync(productId);
 		}
-
-		public async Task LoadAsAsync(int productId)
-		{
-			Product = await _productDataService.GetByIdAsync(productId);
-		}
-
-		private Product _Product;
-		public Product Product
-		{
-			get { return _Product; }
-			private set
-			{
-				_Product = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public ICommand SaveCommand { get; }
 	}
 }
