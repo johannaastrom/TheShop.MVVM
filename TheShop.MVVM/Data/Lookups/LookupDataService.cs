@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TheShop.DataAccess;
 using TheShop.Model;
 
-namespace TheShop.Data
+namespace TheShop.Data.Lookups
 {
 	public class LookupDataService : IProductLookupDataService
 	{

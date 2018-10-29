@@ -1,10 +1,8 @@
 ﻿using Prism.Events;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using TheShop.Data;
-using TheShop.Model;
+using TheShop.Data.Lookups;
 using TheShop.MVVM.Event;
 
 namespace TheShop.MVVM.ViewModel

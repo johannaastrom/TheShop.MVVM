@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using TheShop.Model;
 
-namespace TheShop.Data
+namespace TheShop.Data.Lookups
 {
 	public interface IProductLookupDataService
 	{

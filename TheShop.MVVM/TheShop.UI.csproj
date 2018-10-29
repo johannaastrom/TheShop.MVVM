@@ -68,10 +68,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\IProductDataService.cs" />
-    <Compile Include="Data\IProductLookupDataService.cs" />
-    <Compile Include="Data\LookupDataService.cs" />
-    <Compile Include="Data\ProductDataService.cs" />
+    <Compile Include="Data\Lookups\IProductLookupDataService.cs" />
+    <Compile Include="Data\Lookups\LookupDataService.cs" />
+    <Compile Include="Data\Repositories\IProductRepository.cs" />
+    <Compile Include="Data\Repositories\ProductRepository.cs" />
     <Compile Include="Event\AfterProductSavedEvent.cs" />
     <Compile Include="Event\OpenProductDetailViewEvent.cs" />
     <Compile Include="Startup\Bootstrapper.cs" />

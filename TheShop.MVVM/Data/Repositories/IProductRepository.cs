@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using TheShop.Model;
 
-namespace TheShop.MVVM.Data
+namespace TheShop.MVVM.Data.Repositories
 {
-	public interface IProductDataService
+	public interface IProductRepository
 	{
 		Task<Product> GetByIdAsync(int productId);
-		Task SaveASync(Product product);
+		Task SaveASync();
 	}
 }
