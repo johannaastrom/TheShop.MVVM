@@ -1,7 +1,9 @@
 ﻿using Prism.Commands;
 using Prism.Events;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TheShop.Data.Lookups;
 using TheShop.Model;
 using TheShop.MVVM.Data.Repositories;
 using TheShop.MVVM.Event;
@@ -15,23 +17,34 @@ namespace TheShop.MVVM.ViewModel
 		private IProductRepository _productRepository;
 		private IEventAggregator _eventAggregator;
 		private IMessageDialogService _messageDialogService;
+		private ICategoryLookupDataService _categoryLookupDataService;
 		private ProductWrapper _Product;
 		private bool _hasChanges;
 
-		public ProductDetailViewModel(IProductRepository productRepository, IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
+		public ProductDetailViewModel(IProductRepository productRepository, IEventAggregator eventAggregator, IMessageDialogService messageDialogService, ICategoryLookupDataService categoryLookupDataService)
 		{
 			_productRepository = productRepository;
 			_eventAggregator = eventAggregator;
 			_messageDialogService = messageDialogService;
+			_categoryLookupDataService = categoryLookupDataService;
 
 			SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
 			DeleteCommand = new DelegateCommand(OnDeleteExecute);
+
+			Categories = new ObservableCollection<LookupItem>();
 		}
 
 		public async Task LoadAsync(int? productId)
 		{
 			var product = productId.HasValue ? await _productRepository.GetByIdAsync(productId.Value) : CreateNewProduct();
 
+			InitializeProduct(product);
+
+			await LoadCategoriesLookupAsync();
+		}
+
+		private void InitializeProduct(Product product)
+		{
 			Product = new ProductWrapper(product);
 			Product.PropertyChanged += (s, e) =>
 			{
@@ -49,6 +62,16 @@ namespace TheShop.MVVM.ViewModel
 			if (Product.Id == 0)
 			{
 				Product.Name = "";
+			}
+		}
+
+		private async Task LoadCategoriesLookupAsync()
+		{
+			Categories.Clear();
+			var lookup = await _categoryLookupDataService.GetCategoryLookupAsync();
+			foreach (var lookupItem in lookup)
+			{
+				Categories.Add(lookupItem);
 			}
 		}
 
@@ -79,6 +102,8 @@ namespace TheShop.MVVM.ViewModel
 		public ICommand SaveCommand { get; }
 
 		public ICommand DeleteCommand { get; }
+
+		public ObservableCollection<LookupItem> Categories { get; }
 
 		private async void OnSaveExecute()
 		{

@@ -12,6 +12,8 @@ namespace TheShop.Model
 
 		[StringLength(50)]
 		public string Description { get; set; }
+
+		public Category Category { get; set; }
 	}
 }
 

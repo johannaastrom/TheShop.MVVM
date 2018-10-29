@@ -14,13 +14,19 @@ namespace TheShop.MVVM.Wrapper
 
 		public string Name
 		{
-			get { return GetValue<string>()	; }
+			get { return GetValue<string>(); }
 			set { SetValue(value); }
 		}
 
 		public string Description
 		{
 			get { return GetValue<string>(); }
+			set { SetValue(value); }
+		}
+
+		public int? CategoryId
+		{
+			get { return GetValue<int?>(); }
 			set { SetValue(value); }
 		}
 

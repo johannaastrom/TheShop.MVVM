@@ -14,6 +14,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -24,7 +26,12 @@
         <Label Grid.Row="4" Content="Product Description" Margin="5 0" FontSize="16"/>
             <TextBox Grid.Row="5" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Product.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="200" Margin="10 7"/>
 
-            <StackPanel Grid.Row="7" Orientation="Horizontal">
+        <Label Grid.Row="6" Content="Category" Margin="5 0" FontSize="16"/>
+        <ComboBox Grid.Row="7" ItemsSource="{Binding Categories}"
+                  DisplayMemberPath="DisplayProduct" SelectedValuePath="Id" SelectedValue="{Binding Product.Category_Id, Mode=TwoWay}"
+                  Margin="10 0 10 10"/>
+        
+        <StackPanel Grid.Row="9" Orientation="Horizontal">
                 <Button Content="Save" Command="{Binding SaveCommand}" Width="125" Height="30" Margin="20"/>
                 <Button Content="Delete" Command="{Binding DeleteCommand}" Width="125" Height="30" Margin="20"/>
             </StackPanel>

@@ -8,7 +8,7 @@ using TheShop.Model;
 
 namespace TheShop.Data.Lookups
 {
-	public class LookupDataService : IProductLookupDataService
+	public class LookupDataService : IProductLookupDataService, ICategoryLookupDataService
 	{
 		private Func<ProductDbContext> _contextCreator;
 
@@ -27,6 +27,21 @@ namespace TheShop.Data.Lookups
 					{
 						Id = p.Id,
 						DisplayProduct = p.Name
+					})
+					.ToListAsync();
+			}
+		}
+
+		public async Task<IEnumerable<LookupItem>> GetCategoryLookupAsync()
+		{
+			using (var ctx = _contextCreator())
+			{
+				return await ctx.Categories.AsNoTracking()
+					.Select(c =>
+					new LookupItem
+					{
+						Id = c.Id,
+						DisplayProduct = c.Name
 					})
 					.ToListAsync();
 			}
