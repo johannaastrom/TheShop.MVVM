@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using TheShop.MVVM.Event;
+using TheShop.MVVM.View.Services;
 
 namespace TheShop.MVVM.ViewModel
 {
@@ -9,13 +10,14 @@ namespace TheShop.MVVM.ViewModel
 	{
 		private IEventAggregator _eventAggregator;
 		private Func<IProductDetailViewModel> _productDetailViewModelCreator;
+		private IMessageDialogService _messageDialogService;
 		private IProductDetailViewModel _productDetailViewModel;
 
-		public ProductViewModel(INavigationViewModel navigationViewModel, Func<IProductDetailViewModel> productViewModelCreator, IEventAggregator eventAggregator)
+		public ProductViewModel(INavigationViewModel navigationViewModel, Func<IProductDetailViewModel> productViewModelCreator, IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
 		{
 			_eventAggregator = eventAggregator;
-			NavigationViewModel = navigationViewModel;
 			_productDetailViewModelCreator = productViewModelCreator;
+			_messageDialogService = messageDialogService;
 
 			_eventAggregator.GetEvent<OpenProductDetailViewEvent>()
 				.Subscribe(OnOpenProductDetailView);
@@ -44,6 +46,15 @@ namespace TheShop.MVVM.ViewModel
 
 		private async void OnOpenProductDetailView(int productId)
 		{
+			if (ProductDetailViewModel!=null && ProductDetailViewModel.HasChanges)
+			{
+				var result = _messageDialogService.ShowOkCancelDialog("You have made changes. Navigate away?", "Question");
+				if (result == MessageDialogResult.Cancel)
+				{
+					return;
+				}
+
+			}
 			ProductDetailViewModel = _productDetailViewModelCreator();
 			await ProductDetailViewModel.LoadAsync(productId);
 		}

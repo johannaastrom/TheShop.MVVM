@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TheShop.MVVM.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <!--<Grid.RowDefinitions>
+             mc:Ignorable="d"
+    d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="0,0,560,-0.4">
+        <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -16,14 +16,15 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition />
             <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>-->
+        </Grid.RowDefinitions>
 
-        <Label Content="Product Name" HorizontalAlignment="Left" Margin="20,83,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Product.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="20,114,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Product.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="20,190,0,0" Grid.RowSpan="7"/>
-        <Label Content="Product Description" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="14.818,4.016" Margin="20,152,0,0" Width="120"/>
-        <!--<StackPanel Orientation="Vertical"/>-->
-        <Button Content="Save" Margin="20,236,660,158.6" Command="{Binding SaveCommand}"/>
-
+        <Label Content="Product Name" HorizontalAlignment="Left" Margin="39,40,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Product.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="191" Margin="39,71,0,0"/>
+       
+        <Label Content="Product Description" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="14.818,4.016" Margin="39,118,0,0" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Product.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="201" Margin="39,149,0,0"/>
+        
+        <StackPanel Orientation="Vertical"/>
+        <Button Content="Save" Command="{Binding SaveCommand}" Height="30" Margin="39,190,0.2,238.8"/>
     </Grid>
 </UserControl>

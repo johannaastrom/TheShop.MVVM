@@ -13,6 +13,7 @@ namespace TheShop.MVVM.ViewModel
 		private IProductRepository _productRepository;
 		private IEventAggregator _eventAggregator;
 		private ProductWrapper _Product;
+		private bool _hasChanges;
 
 		public ProductDetailViewModel(IProductRepository productRepository, IEventAggregator eventAggregator)
 		{
@@ -29,6 +30,10 @@ namespace TheShop.MVVM.ViewModel
 			Product = new ProductWrapper(product);
 			Product.PropertyChanged += (s, e) =>
 			{
+				if (!HasChanges)
+				{
+					HasChanges = _productRepository.HasChanges();
+				}
 				if (e.PropertyName == nameof(Product.HasErrors))
 				{
 					((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
@@ -48,11 +53,26 @@ namespace TheShop.MVVM.ViewModel
 			}
 		}
 
+		public bool HasChanges
+		{
+			get { return _hasChanges; }
+			set
+			{
+				if (_hasChanges != value)
+				{
+					_hasChanges = value;
+					OnPropertyChanged();
+					((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+				}
+			}
+		}
+
 		public ICommand SaveCommand { get; }
 
 		private async void OnSaveExecute()
 		{
 			await _productRepository.SaveASync();
+			HasChanges = _productRepository.HasChanges();
 			_eventAggregator.GetEvent<AfterProductSavedEvent>().Publish(
 				new AfterProductSavedEventArgs
 				{
@@ -63,8 +83,7 @@ namespace TheShop.MVVM.ViewModel
 
 		private bool OnSaveCanExecute()
 		{
-			//TODO check in addition if product has changes
-			return Product!=null && !Product.HasErrors;
+			return Product != null && !Product.HasErrors && HasChanges;
 		}
 	}
 }

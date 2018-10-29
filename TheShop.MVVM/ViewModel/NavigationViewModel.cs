@@ -32,28 +32,10 @@ namespace TheShop.MVVM.ViewModel
 			Products.Clear();
 			foreach (var item in lookup)
 			{
-				Products.Add(new NavigationItemViewModel(item.Id, item.DisplayProduct));
+				Products.Add(new NavigationItemViewModel(item.Id, item.DisplayProduct, _eventAggregator));
 			}
 		}
 
 		public ObservableCollection<NavigationItemViewModel> Products { get; }
-
-		private NavigationItemViewModel _selectedProduct;
-
-		public NavigationItemViewModel SelectedProduct 
-		{
-			get { return _selectedProduct; }
-			set
-			{
-				_selectedProduct = value;
-				OnPropertyChanged();
-				if (_selectedProduct!=null)
-				{
-					_eventAggregator.GetEvent<OpenProductDetailViewEvent>()
-						.Publish(_selectedProduct.Id);
-				}
-			}
-		}
-
 	}
 }

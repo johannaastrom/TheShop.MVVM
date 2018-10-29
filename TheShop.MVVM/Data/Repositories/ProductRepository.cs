@@ -20,6 +20,11 @@ namespace TheShop.MVVM.Data.Repositories
 			return await _context.Products.SingleAsync(p => p.Id == productId);
 		}
 
+		public bool HasChanges()
+		{
+			return _context.ChangeTracker.HasChanges();
+		}
+
 		public async Task SaveASync()
 		{
 			await _context.SaveChangesAsync();
