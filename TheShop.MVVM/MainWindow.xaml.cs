@@ -1,12 +1,10 @@
-﻿using System.Windows;
+﻿using MahApps.Metro.Controls;
+using System.Windows;
 using TheShop.MVVM.ViewModel;
 
 namespace TheShop.MVVM
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window
+	public partial class MainWindow : MetroWindow
 	{
 		private ProductViewModel _viewModel;
 
