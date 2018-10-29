@@ -4,7 +4,7 @@ namespace TheShop.MVVM.ViewModel
 {
 	public interface IProductDetailViewModel
 	{
-		Task LoadAsync(int productId);
+		Task LoadAsync(int? productId);
 		bool HasChanges { get; }
 	}
 }

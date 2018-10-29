@@ -6,17 +6,7 @@
              xmlns:local="clr-namespace:TheShop.MVVM.View"
              mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="0,0,560,-0.4">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition />
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <Grid>
 
         <Label Content="Product Name" HorizontalAlignment="Left" Margin="39,40,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Product.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="191" Margin="39,71,0,0"/>
@@ -24,7 +14,7 @@
         <Label Content="Product Description" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="14.818,4.016" Margin="39,118,0,0" Width="120"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Product.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="201" Margin="39,149,0,0"/>
         
-        <StackPanel Orientation="Vertical"/>
-        <Button Content="Save" Command="{Binding SaveCommand}" Height="30" Margin="39,190,0.2,238.8"/>
+        <!--<StackPanel Orientation="Vertical"/>-->
+        <Button Content="Save" Command="{Binding SaveCommand}" Margin="39,190,0.2,238.8"/>
     </Grid>
 </UserControl>

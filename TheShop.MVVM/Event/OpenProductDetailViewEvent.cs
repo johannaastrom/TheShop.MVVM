@@ -2,7 +2,7 @@
 
 namespace TheShop.MVVM.Event
 {
-	public class OpenProductDetailViewEvent : PubSubEvent<int>
+	public class OpenProductDetailViewEvent : PubSubEvent<int?>
 	{
 
 	}

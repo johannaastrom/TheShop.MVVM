@@ -8,5 +8,6 @@ namespace TheShop.MVVM.Data.Repositories
 		Task<Product> GetByIdAsync(int productId);
 		Task SaveASync();
 		bool HasChanges();
+		void Add(Product product);
 	}
 }

@@ -1,7 +1,9 @@
 ﻿using Prism.Commands;
 using Prism.Events;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TheShop.Model;
 using TheShop.MVVM.Data.Repositories;
 using TheShop.MVVM.Event;
 using TheShop.MVVM.Wrapper;
@@ -23,9 +25,9 @@ namespace TheShop.MVVM.ViewModel
 			SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
 		}
 
-		public async Task LoadAsync(int productId)
+		public async Task LoadAsync(int? productId)
 		{
-			var product = await _productRepository.GetByIdAsync(productId);
+			var product =productId.HasValue ? await _productRepository.GetByIdAsync(productId.Value) : CreateNewProduct();
 
 			Product = new ProductWrapper(product);
 			Product.PropertyChanged += (s, e) =>
@@ -41,6 +43,10 @@ namespace TheShop.MVVM.ViewModel
 			};
 
 			((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+			if (Product.Id == 0)
+			{
+				Product.Name = "";
+			}
 		}
 
 		public ProductWrapper Product
@@ -84,6 +90,13 @@ namespace TheShop.MVVM.ViewModel
 		private bool OnSaveCanExecute()
 		{
 			return Product != null && !Product.HasErrors && HasChanges;
+		}
+
+		private Product CreateNewProduct()
+		{
+			var product = new Product();
+			_productRepository.Add(product);
+			return product;
 		}
 	}
 }

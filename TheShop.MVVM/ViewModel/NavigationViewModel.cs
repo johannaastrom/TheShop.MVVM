@@ -22,8 +22,15 @@ namespace TheShop.MVVM.ViewModel
 
 		private void AfterProductSaved(AfterProductSavedEventArgs obj)
 		{
-			var lookupItem = Products.Single(p => p.Id == obj.Id);
-			lookupItem.DisplayProduct = obj.DisplayProduct;
+			var lookupItem = Products.SingleOrDefault(p => p.Id == obj.Id);
+			if (lookupItem == null)
+			{
+				Products.Add(new NavigationItemViewModel(obj.Id, obj.DisplayProduct, _eventAggregator));
+			}
+			else
+			{
+				lookupItem.DisplayProduct = obj.DisplayProduct;
+			}
 		}
 
 		public async Task LoadAsync()

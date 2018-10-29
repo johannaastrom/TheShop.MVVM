@@ -14,6 +14,11 @@ namespace TheShop.MVVM.Data.Repositories
 			_context = context;
 		}
 
+		public void Add(Product product)
+		{
+			_context.Products.Add(product);
+		}
+
 		public async Task<Product> GetByIdAsync(int productId)
 		{
 			//Load data from database

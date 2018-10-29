@@ -1,6 +1,8 @@
-﻿using Prism.Events;
+﻿using Prism.Commands;
+using Prism.Events;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TheShop.MVVM.Event;
 using TheShop.MVVM.View.Services;
 
@@ -24,13 +26,15 @@ namespace TheShop.MVVM.ViewModel
 
 			NavigationViewModel = navigationViewModel;
 
-			//CreateNewProductCommand = new DelegateCommand(OnCreateNewProductExecute);
+			CreateNewProductCommand = new DelegateCommand(OnCreateNewProductExecute);
 		}
 
 		public async Task LoadAsync()
 		{
 			await NavigationViewModel.LoadAsync();
 		}
+
+		public ICommand CreateNewProductCommand { get; }
 
 		public INavigationViewModel NavigationViewModel { get; }
 
@@ -44,7 +48,7 @@ namespace TheShop.MVVM.ViewModel
 			}
 		}
 
-		private async void OnOpenProductDetailView(int productId)
+		private async void OnOpenProductDetailView(int? productId)
 		{
 			if (ProductDetailViewModel!=null && ProductDetailViewModel.HasChanges)
 			{
@@ -57,6 +61,11 @@ namespace TheShop.MVVM.ViewModel
 			}
 			ProductDetailViewModel = _productDetailViewModelCreator();
 			await ProductDetailViewModel.LoadAsync(productId);
+		}
+
+		private void OnCreateNewProductExecute()
+		{
+			OnOpenProductDetailView(null);
 		}
 	}
 }
