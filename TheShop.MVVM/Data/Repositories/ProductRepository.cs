@@ -18,6 +18,10 @@ namespace TheShop.MVVM.Data.Repositories
 		{
 			_context.Products.Add(product);
 		}
+		public void Remove(Product product)
+		{
+			_context.Products.Remove(product);
+		}
 
 		public async Task<Product> GetByIdAsync(int productId)
 		{

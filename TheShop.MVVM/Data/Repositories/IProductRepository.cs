@@ -9,5 +9,6 @@ namespace TheShop.MVVM.Data.Repositories
 		Task SaveASync();
 		bool HasChanges();
 		void Add(Product product);
+		void Remove(Product model);
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using Prism.Events;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,20 @@ namespace TheShop.MVVM.ViewModel
 			_eventAggregator = eventAggregator;
 			Products = new ObservableCollection<NavigationItemViewModel>();
 			_eventAggregator.GetEvent<AfterProductSavedEvent>().Subscribe(AfterProductSaved);
+			_eventAggregator.GetEvent<AfterProductDeletedEvent>().Subscribe(AfterProductDeleted);
 		}
+
+		public async Task LoadAsync()
+		{
+			var lookup = await _productLookupDataService.GetProductLookupAsync();
+			Products.Clear();
+			foreach (var item in lookup)
+			{
+				Products.Add(new NavigationItemViewModel(item.Id, item.DisplayProduct, _eventAggregator));
+			}
+		}
+
+		public ObservableCollection<NavigationItemViewModel> Products { get; } 
 
 		private void AfterProductSaved(AfterProductSavedEventArgs obj)
 		{
@@ -33,16 +47,13 @@ namespace TheShop.MVVM.ViewModel
 			}
 		}
 
-		public async Task LoadAsync()
+		private void AfterProductDeleted(int productId)
 		{
-			var lookup = await _productLookupDataService.GetProductLookupAsync();
-			Products.Clear();
-			foreach (var item in lookup)
+			var product = Products.SingleOrDefault(p => p.Id == productId);
+			if (product != null)
 			{
-				Products.Add(new NavigationItemViewModel(item.Id, item.DisplayProduct, _eventAggregator));
-			}
+				Products.Remove(product);
+			}	
 		}
-
-		public ObservableCollection<NavigationItemViewModel> Products { get; }
 	}
 }

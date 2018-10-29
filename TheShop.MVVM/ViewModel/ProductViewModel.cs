@@ -24,6 +24,9 @@ namespace TheShop.MVVM.ViewModel
 			_eventAggregator.GetEvent<OpenProductDetailViewEvent>()
 				.Subscribe(OnOpenProductDetailView);
 
+			_eventAggregator.GetEvent<AfterProductDeletedEvent>().
+				Subscribe(AfterProductDeleted);
+
 			NavigationViewModel = navigationViewModel;
 
 			CreateNewProductCommand = new DelegateCommand(OnCreateNewProductExecute);
@@ -66,6 +69,11 @@ namespace TheShop.MVVM.ViewModel
 		private void OnCreateNewProductExecute()
 		{
 			OnOpenProductDetailView(null);
+		}
+
+		private void AfterProductDeleted(int productId)
+		{
+			ProductDetailViewModel = null;
 		}
 	}
 }

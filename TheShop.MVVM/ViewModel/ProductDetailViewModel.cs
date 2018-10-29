@@ -1,11 +1,11 @@
 ﻿using Prism.Commands;
 using Prism.Events;
-using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TheShop.Model;
 using TheShop.MVVM.Data.Repositories;
 using TheShop.MVVM.Event;
+using TheShop.MVVM.View.Services;
 using TheShop.MVVM.Wrapper;
 
 namespace TheShop.MVVM.ViewModel
@@ -14,20 +14,23 @@ namespace TheShop.MVVM.ViewModel
 	{
 		private IProductRepository _productRepository;
 		private IEventAggregator _eventAggregator;
+		private IMessageDialogService _messageDialogService;
 		private ProductWrapper _Product;
 		private bool _hasChanges;
 
-		public ProductDetailViewModel(IProductRepository productRepository, IEventAggregator eventAggregator)
+		public ProductDetailViewModel(IProductRepository productRepository, IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
 		{
 			_productRepository = productRepository;
 			_eventAggregator = eventAggregator;
+			_messageDialogService = messageDialogService;
 
 			SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
+			DeleteCommand = new DelegateCommand(OnDeleteExecute);
 		}
 
 		public async Task LoadAsync(int? productId)
 		{
-			var product =productId.HasValue ? await _productRepository.GetByIdAsync(productId.Value) : CreateNewProduct();
+			var product = productId.HasValue ? await _productRepository.GetByIdAsync(productId.Value) : CreateNewProduct();
 
 			Product = new ProductWrapper(product);
 			Product.PropertyChanged += (s, e) =>
@@ -75,6 +78,8 @@ namespace TheShop.MVVM.ViewModel
 
 		public ICommand SaveCommand { get; }
 
+		public ICommand DeleteCommand { get; }
+
 		private async void OnSaveExecute()
 		{
 			await _productRepository.SaveASync();
@@ -97,6 +102,17 @@ namespace TheShop.MVVM.ViewModel
 			var product = new Product();
 			_productRepository.Add(product);
 			return product;
+		}
+
+		private async void OnDeleteExecute()
+		{
+			var result = _messageDialogService.ShowOkCancelDialog($"Do you really want to delete the product {Product.Name}?", "Question");
+			if (result == MessageDialogResult.OK)
+			{
+				_productRepository.Remove(Product.Model);
+				await _productRepository.SaveASync();
+				_eventAggregator.GetEvent<AfterProductDeletedEvent>().Publish(Product.Id);
+			}
 		}
 	}
 }

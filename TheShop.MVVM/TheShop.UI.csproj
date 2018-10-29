@@ -72,6 +72,7 @@
     <Compile Include="Data\Lookups\LookupDataService.cs" />
     <Compile Include="Data\Repositories\IProductRepository.cs" />
     <Compile Include="Data\Repositories\ProductRepository.cs" />
+    <Compile Include="Event\AfterProductDeletedEvent.cs" />
     <Compile Include="Event\AfterProductSavedEvent.cs" />
     <Compile Include="Event\OpenProductDetailViewEvent.cs" />
     <Compile Include="Startup\Bootstrapper.cs" />

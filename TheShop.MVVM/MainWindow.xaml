@@ -4,9 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:view="clr-namespace:TheShop.MVVM.View"
+        xmlns:viewModel="clr-namespace:TheShop.MVVM.ViewModel"
         xmlns:local="clr-namespace:TheShop.MVVM"
         mc:Ignorable="d"
         Title="The Shop" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:ProductDetailViewModel}">
+            <view:ProductDetailView/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -17,7 +23,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <view:NavigationView Grid.Row="1" DataContext="{Binding NavigationViewModel}" Margin="0,-10,-153.2,10"/>
-        <view:ProductDetailView Grid.Row="1" Grid.Column="1" DataContext="{Binding ProductDetailViewModel}" />
+        <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding ProductDetailViewModel}" />
         <Menu Grid.ColumnSpan="2">
             <MenuItem Header="Create">
                 <MenuItem Header="New Product" Command="{Binding CreateNewProductCommand}"/>
