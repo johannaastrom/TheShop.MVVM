@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheShop.Model;
 
 namespace TheShop.Model
 {
 	public class Category
 	{
-		public Category()
-		{
-			Products = new Collection<Product>();
-		}
+		//public Category()
+		//{
+		//	Products = new Collection<Product>();
+		//}
 
 		public int Id { get; set; }
 
@@ -23,6 +17,6 @@ namespace TheShop.Model
 		[StringLength(50)]
 		public string Name { get; set; }
 
-		public ICollection<Product> Products { get; set; }
+		//public ICollection<Product> Products { get; set; }
 	}
 }

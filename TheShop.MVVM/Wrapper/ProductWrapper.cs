@@ -24,7 +24,7 @@ namespace TheShop.MVVM.Wrapper
 			set { SetValue(value); }
 		}
 
-		public int? CategoryId
+		public int? FavoriteCategoryId
 		{
 			get { return GetValue<int?>(); }
 			set { SetValue(value); }

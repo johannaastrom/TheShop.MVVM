@@ -13,7 +13,9 @@ namespace TheShop.Model
 		[StringLength(50)]
 		public string Description { get; set; }
 
-		public Category Category { get; set; }
+		public int? FavoriteCategoryId { get; set; }
+
+		public Category FavoriteCategory { get; set; }
 	}
 }
 
