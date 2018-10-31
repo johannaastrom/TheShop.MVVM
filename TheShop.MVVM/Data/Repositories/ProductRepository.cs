@@ -25,7 +25,6 @@ namespace TheShop.MVVM.Data.Repositories
 
 		public async Task<Product> GetByIdAsync(int productId)
 		{
-			//Load data from database
 			return await _context.Products.SingleAsync(p => p.Id == productId);
 		}
 

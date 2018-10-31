@@ -68,6 +68,7 @@ namespace TheShop.MVVM.ViewModel
 		private async Task LoadCategoriesLookupAsync()
 		{
 			Categories.Clear();
+			Categories.Add(new NullLookupItem() { DisplayProduct = " - " });
 			var lookup = await _categoryLookupDataService.GetCategoryLookupAsync();
 			foreach (var lookupItem in lookup)
 			{
