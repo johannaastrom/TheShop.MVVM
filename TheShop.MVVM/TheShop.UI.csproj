@@ -35,8 +35,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net46\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=7.1.0.431, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.1.0.431\lib\net45\Prism.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +77,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\Lookups\ICategoryLookupDataService.cs" />
+    <Compile Include="Data\Lookups\IProductLookupDataService.cs" />
+    <Compile Include="Data\Lookups\LookupDataService.cs" />
+    <Compile Include="Data\Repositories\IProductRepository.cs" />
+    <Compile Include="Data\Repositories\ProductRepository.cs" />
+    <Compile Include="Event\AfterProductDeletedEvent.cs" />
+    <Compile Include="Event\AfterProductSavedEvent.cs" />
+    <Compile Include="Event\OpenProductDetailViewEvent.cs" />
+    <Compile Include="Startup\Bootstrapper.cs" />
+    <Compile Include="ViewModel\INavigationItemViewModel.cs" />
+    <Compile Include="ViewModel\INavigationViewModel.cs" />
+    <Compile Include="ViewModel\IProductDetailViewModel.cs" />
+    <Compile Include="ViewModel\NavigationItemViewModel.cs" />
+    <Compile Include="ViewModel\NavigationViewModel.cs" />
+    <Compile Include="ViewModel\ProductDetailViewModel.cs" />
+    <Compile Include="ViewModel\ProductViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\NavigationView.xaml.cs">
+      <DependentUpon>NavigationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProductDetailView.xaml.cs">
+      <DependentUpon>ProductDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Services\IMessageDialogService.cs" />
+    <Compile Include="View\Services\MessageDialogService.cs" />
+    <Compile Include="Wrapper\ModelWrapper.cs" />
+    <Compile Include="Wrapper\NotifyDataErrorInfoBase.cs" />
+    <Compile Include="Wrapper\ProductWrapper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,6 +117,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\NavigationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProductDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -86,27 +144,22 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TheShop.DataAccess\TheShop.DataAccess.csproj">
-      <Project>{707310e6-f10d-4eae-9f60-48eb7a888d62}</Project>
+    <ProjectReference Include="..\TheShop.MVVM.DataAccess\TheShop.DataAccess.csproj">
+      <Project>{e95b3cff-9bdb-430b-a331-ae064928877f}</Project>
       <Name>TheShop.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TheShop.Model\TheShop.Model.csproj">
-      <Project>{79e703ae-a4fa-441b-a97b-7bb225a15930}</Project>
+    <ProjectReference Include="..\TheShop.MVVM.Model\TheShop.Model.csproj">
+      <Project>{033e0d37-3a31-4d8b-801b-f9cbf4b40e5b}</Project>
       <Name>TheShop.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="ViewModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
